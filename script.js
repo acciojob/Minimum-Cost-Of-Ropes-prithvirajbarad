@@ -1,22 +1,42 @@
+function compare(a, b) {
+  if (a < b) {
+      return -1;
+  } else if (a > b) {
+      return 1;
+  } else {
+      return 0;
+  }
+}
+ 
+ 
+ 
 function calculateMinCost() {
   //your code here
-  let string = document.getElementById("rope-lengths").value
-	
-	let arr = string.split(",");
-	let finalValue =0;
-	while(arr.length > 1){
-		arr.sort((a,b) =>{return(a-b)});
-		let value = parseInt (arr.shift());
-		let value1 = parseInt(arr.shift());
-		let mainValue = value+value1;
-		finalValue = finalValue + mainValue;
-		arr.push(mainValue);
-		
-	}
-  let result = document.getElementById("result");
-	result.innerText = finalValue;
-	return finalValue;
-			
+  let str=document.getElementById('rope-lengths').value.split(",");
+  let arr=str.map((str)=>parseInt(str));
+  // console.log(arr);
+  
+let total=0;
+arr=arr.sort(compare);
+// console.log("arr ",arr);
+while(arr.length>=2){
+  let sum=arr[0]+arr[1];
+  // console.log(sum);
+  let rem=[];
+  rem.push(sum);
+  for(let k=2;k<arr.length;k++){
+    rem.push(arr[k]);
+  }
+  rem=rem.sort(compare);
+  // console.log("rem ",rem);
+  arr=[...rem];
+  // console.log("arr ",arr);
+  total=total+sum;
+  // console.log("total "+total+"----------------------");
 }
-  
-  
+console.log(total);
+ 
+ 
+let result=document.getElementById('result');
+result.innerHTML=total;
+}  
